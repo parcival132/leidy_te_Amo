@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amor Eterno</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', cursive;
+      background-image: url('Copilot_20251011_214831.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    header h1 {
+      font-size: 3em;
+      color: #e91e63;
+      font-style: italic;
+    }
+
+    section {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    section h2 {
+      font-style: italic;
+      font-size: 1.5em;
+    }
+
+    button {
+      display: block;
+      width: 80%;
+      max-width: 300px;
+      margin: 15px auto;
+      padding: 12px 20px;
+      font-size: 1.1em;
+      background-color: #f8bbd0;
+      color: #333;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Segoe UI', cursive;
+      font-style: italic;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #f48fb1;
+    }
+
+    #contenido p, #contenido h3 {
+      font-style: italic;
+    }
+
+    #contenido {
+      margin-top: 20px;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .video-container {
+      margin-top: 30px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #555;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Amor Eterno</h1>
+    <p>Un rincón para celebrar el amor verdadero</p>
+  </header>
+
+  <section>
+    <h2>💖 Elige una opción</h2>
+    <button onclick="mostrarPoema()">Poema</button>
+    <button onclick="mostrarCarta()">Carta de amor</button>
+    <button onclick="mostrarMusica()">🎶 Escuchar Corazón Sin Cara</button>
+
+    <div id="contenido"></div>
+    <div class="video-container" id="musica"></div>
+  </section>
+
+  <footer>
+    Hecho con 💖 por alguien que nunca deja de amar.
+  </footer>
+
+  <script>
+    function mostrarPoema() {
+      document.getElementById("contenido").innerHTML = `
+        <h3>🌹 Poema para ti</h3>
+        <p>
+          En tus ojos veo el cielo,<br>
+          en tu voz escucho paz,<br>
+          cada instante a tu lado<br>
+          es un sueño que no se va.<br><br>
+          Si el amor tuviera forma,<br>
+          sería tu dulce mirar,<br>
+          y si el tiempo se detiene,<br>
+          que sea para siempre, sin final.
+        </p>
+      `;
+      document.getElementById("musica").innerHTML = "";
+    }
+
+    function mostrarCarta() {
+      document.getElementById("contenido").innerHTML = `
+        <h3>💌 Carta de amor</h3>
+        <p>
+          Mi amor:<br><br>
+          Desde que llegaste a mi vida, todo cambió. Tu sonrisa ilumina mis días y tu presencia me da fuerza. 
+          Esta carta es solo una pequeña muestra de lo que siento por ti. Cada palabra que escribo está llena de cariño, 
+          de ternura y de la promesa de estar contigo en cada paso que demos juntos.<br><br>
+          Te amo más de lo que las palabras pueden expresar.<br><br>
+          Con todo mi corazón,<br>
+          Basti
+        </p>
+      `;
+      document.getElementById("musica").innerHTML = "";
+    }
+
+    function mostrarMusica() {
+      document.getElementById("musica").innerHTML = `
+        <iframe width="560" height="315"
+          src="https://www.youtube.com/embed/ZNN7NTl83cI?autoplay=1"
+          title="Prince Royce - Corazón Sin Cara (Official Video High Quality)"
+          frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+        </iframe>
+      `;
+      document.getElementById("contenido").innerHTML = "";
+    }
+  </script>
+</body>
+</html>
