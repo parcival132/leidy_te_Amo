@@ -118,9 +118,6 @@
   </footer>
 
   <script>
-    // Borra datos previos para forzar ruta por defecto
-    localStorage.removeItem('imagenes');
-
     const defaultImagenes = [
       'leidy2.jpg',
       'basti.jpg',
@@ -187,9 +184,8 @@
         img.className = 'foto';
         img.onload = () => img.classList.add('loaded');
 
-        // Primer intento con carpeta /img/, si falla prueba sin prefijo
         img.onerror = function() {
-          if (!this._fallback) {
+          if (!this._fallback && !nombre.startsWith('data:image')) {
             this._fallback = true;
             this.src = nombre;
           } else {
@@ -198,7 +194,7 @@
           }
         };
 
-        img.src = 'img/' + nombre;
+        img.src = nombre.startsWith('data:image') ? nombre : 'img/' + nombre;
         gal.appendChild(img);
       });
 
