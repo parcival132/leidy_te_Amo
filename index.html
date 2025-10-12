@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+ch(src => {
+        galeriaHTML += `<img src="${src}" alt="Recuerdo de amor" class="foto">`;
+      });
+
+      galeriaHTML += `</div>`;
+
+      document.getElementById("contenido").innerHTML = galeriaHTML;
+      document.getElementById("musica").innerHTML = "";
+    }
+  </script>
+</body>
+</html><!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -119,6 +130,8 @@
     <button onclick="mostrarCarta()">Carta de amor</button>
     <button onclick="mostrarMusica()">🎶 Escuchar Corazón Sin Cara</button>
     <button onclick="mostrarGaleria()">📸 Nuestro Amor</button>
+    <input type="file" id="imagenInput" accept="image/*" style="display:none" onchange="agregarImagen(event)">
+    <button onclick="document.getElementById('imagenInput').click()">➕ Agregar Imagen</button>
 
     <div id="contenido"></div>
     <div class="video-container" id="musica"></div>
@@ -129,6 +142,12 @@
   </footer>
 
   <script>
+    let imagenes = [
+      'img/Leidy (2).jpg',
+      'img/basti.jpg',
+      'img/te amo mi niña.jpg'
+    ];
+
     function mostrarPoema() {
       document.getElementById("contenido").innerHTML = `
         <h3>🌹 Poema para ti</h3>
@@ -174,12 +193,6 @@
     }
 
     function mostrarGaleria() {
-      const imagenes = [
-        'img/Leidy (2).jpg',
-        'img/basti.jpg',
-        'img/te amo mi niña.jpg'
-      ];
-
       let galeriaHTML = `<h3>📸 Nuestro Amor</h3><div class="galeria">`;
 
       imagenes.forEach(src => {
@@ -187,13 +200,23 @@
       });
 
       galeriaHTML += `</div>`;
-
       document.getElementById("contenido").innerHTML = galeriaHTML;
       document.getElementById("musica").innerHTML = "";
+    }
+
+    function agregarImagen(event) {
+      const archivo = event.target.files[0];
+      if (archivo) {
+        const url = URL.createObjectURL(archivo);
+        imagenes.push(url);
+        mostrarGaleria();
+      }
     }
   </script>
 </body>
 </html>
+
+
 
 
 
