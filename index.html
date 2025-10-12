@@ -1,19 +1,8 @@
-ch(src => {
-        galeriaHTML += `<img src="${src}" alt="Recuerdo de amor" class="foto">`;
-      });
-
-      galeriaHTML += `</div>`;
-
-      document.getElementById("contenido").innerHTML = galeriaHTML;
-      document.getElementById("musica").innerHTML = "";
-    }
-  </script>
-</body>
-</html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Amor Eterno</title>
   <style>
     body {
@@ -26,34 +15,25 @@ ch(src => {
       background-position: center;
       color: #333;
     }
-
     header {
       text-align: center;
       padding: 50px 20px;
-      background-color: rgba(255, 255, 255, 0.7);
+      background-color: rgba(255,255,255,0.7);
     }
-
     header h1 {
       font-size: 3em;
       color: #e91e63;
       font-style: italic;
     }
-
     section {
       max-width: 800px;
       margin: 20px auto;
       padding: 20px;
-      background-color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255,255,255,0.85);
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: center;
     }
-
-    section h2 {
-      font-style: italic;
-      font-size: 1.5em;
-    }
-
     button {
       display: block;
       width: 80%;
@@ -68,27 +48,20 @@ ch(src => {
       font-family: 'Segoe UI', cursive;
       font-style: italic;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s;
     }
-
     button:hover {
       background-color: #f48fb1;
     }
-
-    #contenido p, #contenido h3 {
+    #contenido h3,
+    #contenido p {
       font-style: italic;
     }
-
-    #contenido {
+    .no-fotos {
       margin-top: 20px;
       font-size: 1.1em;
-      line-height: 1.6;
+      color: #777;
     }
-
-    .video-container {
-      margin-top: 30px;
-    }
-
     .galeria {
       display: flex;
       flex-wrap: wrap;
@@ -96,25 +69,28 @@ ch(src => {
       gap: 15px;
       margin-top: 20px;
     }
-
     .foto {
       width: 100%;
       max-width: 250px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.5s, transform 0.5s;
     }
-
-    .foto:hover {
-      transform: scale(1.05);
+    .foto.loaded {
+      opacity: 1;
+      transform: scale(1);
     }
-
+    .video-container {
+      margin-top: 30px;
+    }
     footer {
       text-align: center;
       padding: 20px;
       font-size: 0.9em;
       color: #555;
-      background-color: rgba(255, 255, 255, 0.7);
+      background-color: rgba(255,255,255,0.7);
     }
   </style>
 </head>
@@ -130,8 +106,8 @@ ch(src => {
     <button onclick="mostrarCarta()">Carta de amor</button>
     <button onclick="mostrarMusica()">🎶 Escuchar Corazón Sin Cara</button>
     <button onclick="mostrarGaleria()">📸 Nuestro Amor</button>
-    <input type="file" id="imagenInput" accept="image/*" style="display:none" onchange="agregarImagen(event)">
-    <button onclick="document.getElementById('imagenInput').click()">➕ Agregar Imagen</button>
+    <input type="file" id="imagenInput" accept="image/*" style="display:none" onchange="agregarImagen(event)"/>
+    <button onclick="imagenInput.click()">➕ Agregar Imagen</button>
 
     <div id="contenido"></div>
     <div class="video-container" id="musica"></div>
@@ -142,14 +118,22 @@ ch(src => {
   </footer>
 
   <script>
-    let imagenes = [
-      'img/Leidy_(2).jpg',
-      'img/basti.jpg',
-      'img/te_amo_mi_niña.jpg'
+    // Borra datos previos para forzar ruta por defecto
+    localStorage.removeItem('imagenes');
+
+    const defaultImagenes = [
+      'leidy_(2).jpg',
+      'basti.jpg',
+      'te_amo_mi_niña.jpg'
     ];
+    let imagenes = JSON.parse(localStorage.getItem('imagenes')) || defaultImagenes;
+
+    function guardarImagenes() {
+      localStorage.setItem('imagenes', JSON.stringify(imagenes));
+    }
 
     function mostrarPoema() {
-      document.getElementById("contenido").innerHTML = `
+      document.getElementById('contenido').innerHTML = `
         <h3>🌹 Poema para ti</h3>
         <p>
           En tus ojos veo el cielo,<br>
@@ -160,64 +144,81 @@ ch(src => {
           sería tu dulce mirar,<br>
           y si el tiempo se detiene,<br>
           que sea para siempre, sin final.
-        </p>
-      `;
-      document.getElementById("musica").innerHTML = "";
+        </p>`;
+      document.getElementById('musica').innerHTML = '';
     }
 
     function mostrarCarta() {
-      document.getElementById("contenido").innerHTML = `
+      document.getElementById('contenido').innerHTML = `
         <h3>💌 Carta de amor</h3>
         <p>
           Mi amor:<br><br>
-          Desde que llegaste a mi vida, todo cambió. Tu sonrisa ilumina mis días y tu presencia me da fuerza. 
-          Esta carta es solo una pequeña muestra de lo que siento por ti. Cada palabra que escribo está llena de cariño, 
-          de ternura y de la promesa de estar contigo en cada paso que demos juntos.<br><br>
-          Te amo más de lo que las palabras pueden expresar.<br><br>
-          Con todo mi corazón,<br>
-          Basti
-        </p>
-      `;
-      document.getElementById("musica").innerHTML = "";
+          Desde que llegaste a mi vida, todo cambió...
+        </p>`;
+      document.getElementById('musica').innerHTML = '';
     }
 
     function mostrarMusica() {
-      document.getElementById("musica").innerHTML = `
+      document.getElementById('musica').innerHTML = `
         <iframe width="560" height="315"
           src="https://www.youtube.com/embed/ZNN7NTl83cI?autoplay=1"
-          title="Prince Royce - Corazón Sin Cara (Official Video High Quality)"
           frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-        </iframe>
-      `;
-      document.getElementById("contenido").innerHTML = "";
+        </iframe>`;
+      document.getElementById('contenido').innerHTML = '';
     }
 
     function mostrarGaleria() {
-      let galeriaHTML = `<h3>📸 Nuestro Amor</h3><div class="galeria">`;
+      const cont = document.getElementById('contenido');
+      const mus = document.getElementById('musica');
+      mus.innerHTML = '';
 
-      imagenes.forEach(src => {
-        galeriaHTML += `<img src="${src}" alt="Recuerdo de amor" class="foto">`;
+      if (!imagenes.length) {
+        cont.innerHTML = `
+          <h3>📸 Nuestro Amor</h3>
+          <p class="no-fotos">Aún no hay recuerdos que mostrar.</p>`;
+        return;
+      }
+
+      const gal = document.createElement('div');
+      gal.className = 'galeria';
+
+      imagenes.forEach(nombre => {
+        const img = new Image();
+        img.className = 'foto';
+        img.onload = () => img.classList.add('loaded');
+
+        // Primer intento con carpeta /img/, si falla prueba sin prefijo
+        img.onerror = function() {
+          if (!this._fallback) {
+            this._fallback = true;
+            this.src = nombre;
+          } else {
+            console.warn('No se pudo cargar imagen:', nombre);
+            this.remove();
+          }
+        };
+
+        img.src = 'img/' + nombre;
+        gal.appendChild(img);
       });
 
-      galeriaHTML += `</div>`;
-      document.getElementById("contenido").innerHTML = galeriaHTML;
-      document.getElementById("musica").innerHTML = "";
+      cont.innerHTML = `<h3>📸 Nuestro Amor</h3>`;
+      cont.appendChild(gal);
+      console.log('Galería actualizada:', imagenes);
     }
 
-    function agregarImagen(event) {
-      const archivo = event.target.files[0];
-      if (archivo) {
-        const url = URL.createObjectURL(archivo);
-        imagenes.push(url);
+    function agregarImagen(e) {
+      const file = e.target.files[0];
+      if (!file) return console.warn('No seleccionaste nada.');
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        imagenes.push(reader.result);
+        guardarImagenes();
         mostrarGaleria();
-      }
+      };
+      reader.readAsDataURL(file);
     }
   </script>
 </body>
 </html>
-
-
-
-
-
-
