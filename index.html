@@ -78,6 +78,26 @@
       margin-top: 30px;
     }
 
+    .galeria {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .foto {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .foto:hover {
+      transform: scale(1.05);
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -98,6 +118,7 @@
     <button onclick="mostrarPoema()">Poema</button>
     <button onclick="mostrarCarta()">Carta de amor</button>
     <button onclick="mostrarMusica()">🎶 Escuchar Corazón Sin Cara</button>
+    <button onclick="mostrarGaleria()">📸 Nuestro Amor</button>
 
     <div id="contenido"></div>
     <div class="video-container" id="musica"></div>
@@ -150,6 +171,25 @@
         </iframe>
       `;
       document.getElementById("contenido").innerHTML = "";
+    }
+
+    function mostrarGaleria() {
+      const imagenes = [
+        'Leidy (2).jpg',
+        'basti.jpg',
+        'te amo mi niña.jpg'
+      ];
+
+      let galeriaHTML = `<h3>📸 Nuestro Amor</h3><div class="galeria">`;
+
+      imagenes.forEach(src => {
+        galeriaHTML += `<img src="${src}" alt="Recuerdo de amor" class="foto">`;
+      });
+
+      galeriaHTML += `</div>`;
+
+      document.getElementById("contenido").innerHTML = galeriaHTML;
+      document.getElementById("musica").innerHTML = "";
     }
   </script>
 </body>
